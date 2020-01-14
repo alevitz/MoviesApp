@@ -7,6 +7,9 @@ function captureValues() {
   let $movieTitle = $('#moviename').val();
   let $movieRating = $('#rating').val();
 
+  $('#moviename').val("");
+  $('#rating').val("");
+
   return `${$movieTitle} My Rating: ${$movieRating}`;
 
 }
@@ -18,8 +21,18 @@ function appendMovie(str) {
 
 }
 
-function removeMovie( event ) {
-  let $target = $(event.target);
-  $target.remove();
+function post () {
+  appendMovie(captureValues());
 }
 
+function removeMovie( event ) {
+  let $target = $(event.target);
+  $target.parent().remove();
+}
+
+$(function () {
+  $(".submit").on("click", post);
+
+  $(".ratingscontainer").on("click", ".remove", removeMovie);
+
+})
